@@ -1,30 +1,41 @@
+const p = document.getElementById('text');
 
-var p = document.getElementById('text');
-var textLists = [
-    'Hello World',
+const textLists = [
+    'Hello Word',
     'This is my App',
     'How are you?',
-    'Thank you'
+    'Thank you',
+    'I love JavaScript',
+    'Good morning',
+    'I am Japanese',
+    'Let it be',
 ];
-var checkTexts = [];
 
-checkTexts = textLists[0].split('').map(function(value){
-    var span = document.createElement('span');
+let checkTexts = [];
 
-    span.textCotnent = value;
-    p.appendChild(span);
+createText();
 
-    return span;
-});
+function createText(){
+    let rnd = Math.floor(Math.random() * textLists.length);
 
-console.log(checkTexts);
+    p.textContent = '';
 
-p.textContent = textLists[0];
+    checkTexts = textLists[rnd].split('').map(function(value){
+        const span = document.createElement('span');
+
+        span.textContent = value;
+        p.appendChild(span);
+
+        return span;
+    });
+}
 
 document.addEventListener('keydown', keyDown);
 
-function keyDown(e) {
-    if(e.key === checkTexts[0].textContent) {
+function keyDown(e){
+    if(e.key === checkTexts[0].textContent){
         checkTexts[0].className = 'add-blue';
+        checkTexts.shift();
+        if(!checkTexts.length)createText();
     }
 }
